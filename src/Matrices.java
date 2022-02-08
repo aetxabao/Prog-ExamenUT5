@@ -14,8 +14,12 @@ public class Matrices {
      * @return array girada nueva, p.ej.  [5, 4, 3, 2, 1]
      */
     public static int[] girada(int[] a) {
-        // TODO: girada
-        return null;
+        int n = a.length;
+        int[] b = new int[n];
+        for (int i = n-1; i >= 0; i--) {
+            b[(n-1)-i] = a[i];
+        }
+        return b;
     }
 
     /**
@@ -33,8 +37,13 @@ public class Matrices {
      * @return la matriz a la derecha de un espejo horizontal
      */
     public static int[][] espejo(int[][] a) {
-        // TODO: espejo
-        return null;
+        int filas = a.length;
+        int columnas = a[0].length;
+        int[][] b = new int[filas][columnas];
+        for (int i = 0; i < filas; i++) {
+            b[i] = girada(a[i]);
+        }
+        return b;
     }
 
     /**
@@ -65,8 +74,12 @@ public class Matrices {
      * @return array de salida
      */
     public static int[] diferencia(int[] a, int x) {
-        // TODO: diferencia
-        return null;
+        int n = a.length;
+        int[] b = new int[n];
+        for (int i = x; i < n; i++) {
+            b[i] = a[i] - a[i-x];
+        }
+        return b;
     }
 
     /**
@@ -85,8 +98,15 @@ public class Matrices {
      * @return matriz con el borde
      */
     public static int[][] borde(int[][] a, int borde) {
-        // TODO: borde
-        return null;
+        int filas = a.length;
+        int columnas = a[0].length;
+        int[][] b = new int[filas][columnas];
+        for (int i = borde; i < filas - borde; i++) {
+            for (int j = borde; j < columnas - borde; j++) {
+                b[i][j] = a[i][j];
+            }
+        }
+        return b;
     }
 
     /**
@@ -113,8 +133,15 @@ public class Matrices {
      * @return matriz con columnas
      */
     public static int[][] to2D(int[] a, int columnas) {
-        // TODO: to2D
-        return null;
+        int filas = (int) Math.ceil((double)a.length / columnas);
+        int[][] b = new int[filas][columnas];
+        int f, c;
+        for (int i = 0; i < a.length; i++) {
+            f = i / columnas;
+            c = i % columnas;
+            b[f][c] = a[i];
+        }
+        return b;
     }
 
 }
