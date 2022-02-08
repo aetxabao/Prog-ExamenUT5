@@ -34,7 +34,11 @@ public class Almacen {
      * @return producto en el almacén con ese identificador o null
      */
     public Producto dameProducto(String id) {
-        //TODO: dameProducto
+        for (int i = 0; i < cantidad; i++) {
+            if (productos[i].getId().equals(id)){
+                return productos[i];
+            }
+        }
         return null;
     }
 
@@ -52,7 +56,25 @@ public class Almacen {
      * @return true si se inserta correctamente, si existía o no hay sitio false
      */
     public boolean insertaProducto(Producto producto) {
-        //TODO: insertaProducto
+        if (cantidad == productos.length) {
+            return false;
+        }
+        if (dameProducto(producto.getId())!=null) {
+            return false;
+        }
+        //busca posicion
+        int pos = 0;
+        while (pos< cantidad && productos[pos].getNombre().compareToIgnoreCase(producto.getNombre())<0) {
+            pos++;
+        }
+        //desplaza
+        for (int i = cantidad; i > pos; i--) {
+            productos[i] = productos[i-1];
+        }
+        //inserta
+        productos[pos] = producto;
+        //contador
+        cantidad++;
         return true;
     }
 
@@ -66,7 +88,20 @@ public class Almacen {
      * @return true si se elimina el producto, false si no existía
      */
     public boolean eliminaProducto(String id) {
-        //TODO: eliminaProducto
+        if (dameProducto(id)==null) {
+            return false;
+        }
+        //busca posicion
+        int pos = 0;
+        while (!productos[pos].getId().equals(id)) {
+            pos++;
+        }
+        //desplaza
+        for (int i = pos; i < cantidad - 1; i++) {
+            productos[i] = productos[i+1];
+        }
+        //contador
+        cantidad--;
         return true;
     }
 

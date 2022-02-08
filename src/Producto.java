@@ -36,7 +36,19 @@ public class Producto {
      * @param json cadena con la representación json de un objeto producto
      */
     public Producto(String json) {
-        // TODO: Producto
+        int i;
+        String s;
+        String str = json.substring(1,json.length()-1);
+        String[] fields = str.split(",");
+        i = fields[0].indexOf(':');
+        s = fields[0].substring(i+1);
+        this.id = s.replaceAll("'","");
+        i = fields[1].indexOf(':');
+        s = fields[1].substring(i+1);
+        this.nombre = s.replaceAll("'","");
+        i = fields[2].indexOf(':');
+        s = fields[2].substring(i+1);
+        this.stock =  Integer.valueOf(s);
     }
 
     /**
@@ -70,7 +82,9 @@ public class Producto {
      */
     @Override
     public String toString() {
-        // TODO: toString
-        return null;
+        StringBuilder sb = new StringBuilder();
+        sb.append("{'id':'").append(id).append("','nombre':'").append(nombre)
+                .append("','stock':").append(stock).append("}");
+        return sb.toString();
     }
 }
